@@ -1,0 +1,62 @@
+﻿@using McbaExampleWithLogin.Models
+@inject IHttpContextAccessor HttpContextAccessor
+@model Account
+@{
+    ViewData["Title"] = "ViewStatements";
+}
+<h1 class="display-4">Account Number @Model.AccountNumber (@Model.AccountType)</h1>
+<div>
+    <h3>My Statements</h3>
+    <table class="table">
+        <tr>
+            
+            <th>@Html.DisplayNameFor(x => x.Transactions[0].TransactionID)</th>
+            <th>@Html.DisplayNameFor(x => x.Transactions[0].TransactionType)</th>
+            <th>@Html.DisplayNameFor(x => x.Transactions[0].AccountNumber)</th>
+            <th>@Html.DisplayNameFor(x => x.Transactions[0].DestinationAccountNumber)</th>
+            <th>@Html.DisplayNameFor(x => x.Transactions[0].Amount)</th>
+            <th>Date</th>
+            <th>@Html.DisplayNameFor(x => x.Transactions[0].Comment)</th>
+            <th></th>
+        </tr>
+        @for(int i = (int)HttpContextAccessor.HttpContext.Session.GetInt32("start"); i <= HttpContextAccessor.HttpContext.Session.GetInt32("end"); i++)
+        {
+            var localTime = @Model.Transactions[i].TransactionTimeUtc.ToLocalTime();
+            var transactionType = HttpContextAccessor.HttpContext.Session.GetString("type" + i);
+            <tr>
+                <td>@Html.DisplayFor(x => x.Transactions[i].TransactionID)</td> 
+                <td>@Html.DisplayFor(x => transactionType)</td> 
+                <td>@Html.DisplayFor(x => x.Transactions[i].AccountNumber)</td> 
+                <td>@Html.DisplayFor(x => x.Transactions[i].DestinationAccountNumber)</td>  
+                <td>@Html.DisplayFor(x => x.Transactions[i].Amount)</td> 
+                <td>@Html.DisplayFor(x => localTime)</td>  
+                <td>@Html.DisplayFor(x => x.Transactions[i].Comment)</td> 
+            </tr>
+        }
+    </table>
+    @if(HttpContextAccessor.HttpContext.Session.GetInt32("start") != 0)
+    {
+        <form asp-action="Back">
+            <div class="form-group">
+                <input type="submit" value="Back" class="btn btn-primary" />
+            </div>
+        </form>  
+    }
+
+    @if(((int)Math.Ceiling((decimal)Model.Transactions.Count() / 4)) != (int)HttpContextAccessor.HttpContext.Session.GetInt32("currentPage"))
+    {
+        <form asp-action="Next">
+            <div class="form-group">
+                <input type="submit" value="Next" class="btn btn-primary" />
+            </div>
+        </form>
+    }
+
+    <div>
+        <a asp-action="Index">Back to Account Selection</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

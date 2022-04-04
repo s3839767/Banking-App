@@ -1,0 +1,35 @@
+﻿@using MvcMovie.Models
+@model IEnumerable<BillPay>
+@{
+    ViewData["Title"] = "Accounts";
+}
+
+<div>
+    
+    <h3>Transactions</h3>
+    <table class="table">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.BillPayID)</th>
+            <th>@Html.DisplayNameFor(model => model.AccountNumber)</th>
+            <th>@Html.DisplayNameFor(model => model.PayeeID)</th>
+            <th>@Html.DisplayNameFor(model => model.ScehduleTimeUtc)</th>
+            <th>@Html.DisplayNameFor(model => model.Period)</th>
+            <th></th>
+        </tr>
+        @foreach(var billPay in Model) 
+        {
+                var localTime = billPay.ScehduleTimeUtc.ToLocalTime();
+            <tr>
+                <td>@Html.DisplayFor(x => billPay.BillPayID)</td>
+                <td>@Html.DisplayFor(x => billPay.AccountNumber)</td>
+                <td>@Html.DisplayFor(x => billPay.PayeeID)</td>
+                <td>@localTime</td>
+                <td>@Html.DisplayFor(x => billPay.Period)</td>
+                <td>
+                    <a class="btn btn-primary"
+                        asp-action="BillPayLock" asp-route-id="@billPay.BillPayID">Lock / Unlock Billpay</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

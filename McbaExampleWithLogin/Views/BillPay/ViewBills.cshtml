@@ -1,0 +1,66 @@
+﻿@using McbaExampleWithLogin.Models
+@model Account
+@{
+    ViewData["Title"] = "BillPay";
+}
+
+<div>
+    
+    <h1 class="display-4">Account Number @Model.AccountNumber (@Model.AccountType)</h1>
+    <h4>Balance: $@Model.Balance</h4>
+    <form asp-action="Index">
+        <table class="table">
+            <tr>
+                <th>@Html.DisplayNameFor(x => x.BillPays[0].BillPayID)</th>
+                <th>@Html.DisplayNameFor(x => x.BillPays[0].PayeeID)</th>
+                <th>@Html.DisplayNameFor(x => x.BillPays[0].Amount)</th>
+                <th>Scheduled Date</th>
+                <th>@Html.DisplayNameFor(x => x.BillPays[0].Period)</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+
+
+                @foreach(var BillPay in Model.BillPays) {
+                    var billDateLocal = BillPay.ScehduleTimeUtc.ToLocalTime();
+                string isLocked;
+                if (BillPay.IsLocked == true)
+                {
+                    isLocked = "Locked";
+                }
+                else
+                {
+                    isLocked = "Not Locked";
+                }
+                <tr>                      
+                        <td>@Html.DisplayFor(x => BillPay.BillPayID)</td>
+                        <td>@Html.DisplayFor(x => BillPay.PayeeID)</td>
+                        <td>@Html.DisplayFor(x => BillPay.Amount)</td>
+                        <td>@billDateLocal</td>
+                        <td>@Html.DisplayFor(x => BillPay.Period)</td>
+                        <td>@isLocked</td>
+                        <td>
+                        @if (BillPay.IsLocked == false)
+                        {
+                            <a class="btn btn-primary"
+                            asp-action="BillPayModify" asp-route-id="@BillPay.BillPayID">Modify</a>
+                        }
+                        <a class="btn btn-primary"
+                        asp-action="BillPayCancel" asp-route-id="@BillPay.BillPayID">Cancel</a>
+                        </td>
+                    </tr>
+                }
+        </table>
+        <br />
+        <a class="btn btn-primary"
+            asp-action="BillPayCreate" asp-route-id="@Model.AccountNumber">Create New Bill Payment</a>
+    </form>
+    <br />
+    <div>
+        <a asp-action="Index">Back to Account Selection</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

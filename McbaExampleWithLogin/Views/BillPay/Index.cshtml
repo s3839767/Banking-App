@@ -1,0 +1,39 @@
+﻿@using McbaExampleWithLogin.Models
+@model Customer
+@{
+    ViewData["Title"] = "BillPay";
+}
+
+<div>
+    
+    <h3>BillPay</h3>
+    <form asp-action="Index">
+        <h5>Please select an account to view the bills set to that account.</h5>
+        <table class="table">
+            <tr>
+                <th></th>
+                <th>@Html.DisplayNameFor(x => x.Accounts[0].AccountNumber)</th>
+                <th>@Html.DisplayNameFor(x => x.Accounts[0].AccountType)</th>
+                <th>@Html.DisplayNameFor(x => x.Accounts[0].Balance)</th>
+                <th></th>
+            </tr>
+                @foreach(var account in Model.Accounts) {
+                    <tr>
+                        <td><input type="radio" class="radio"  name="AccountNumber" id="AccountNumber" value="@account.AccountNumber" />
+                            <label for ="account">
+                                <td>@Html.DisplayFor(x => account.AccountNumber)</td>
+                                <td>@Html.DisplayFor(x => account.AccountType)</td>
+                                <td>@Html.DisplayFor(x => account.Balance)</td>
+                            </label>
+                        </td>
+                    </tr>
+                }
+        </table>
+        <input type="submit" value="Confirm" class="btn btn-primary">
+        @Html.ValidationMessage("accountNumber", new { @class = "text-danger" })
+    </form>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

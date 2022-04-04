@@ -1,0 +1,31 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "889f2092-4698-44d8-b3a5-4e2345fbf0dd": {
+      "ProjectGuid": "889f2092-4698-44d8-b3a5-4e2345fbf0dd",
+      "DisplayName": "McbaExampleWithLogin",
+      "ColorIndex": 0
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    },
+    "0372aee1-ea10-48cf-a3cc-bab6ea258df8": {
+      "ProjectGuid": "0372aee1-ea10-48cf-a3cc-bab6ea258df8",
+      "DisplayName": "WebApi",
+      "ColorIndex": 1
+    },
+    "3661bf8a-9112-43dc-8caf-1936d8e40bd6": {
+      "ProjectGuid": "3661bf8a-9112-43dc-8caf-1936d8e40bd6",
+      "DisplayName": "WebApi",
+      "ColorIndex": 2
+    },
+    "43a67cb6-fc39-4824-a51b-af26df0a662d": {
+      "ProjectGuid": "43a67cb6-fc39-4824-a51b-af26df0a662d",
+      "DisplayName": "MvcMovie",
+      "ColorIndex": 3
+    }
+  },
+  "NextColorIndex": 4
+}

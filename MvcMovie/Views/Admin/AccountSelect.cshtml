@@ -1,0 +1,28 @@
+﻿@using MvcMovie.Models
+@model IEnumerable<Account>
+@{
+    ViewData["Title"] = "Accounts";
+}
+
+<div>
+    
+    <h3>Accounts</h3>
+    <table class="table">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.AccountNumber)</th>
+            <th>@Html.DisplayNameFor(model => model.AccountType)</th>
+            <th></th>
+        </tr>
+        @foreach(var account in Model) 
+        {
+            <tr>
+                <td>@Html.DisplayFor(x => account.AccountNumber)</td>
+                <td>@Html.DisplayFor(x => account.AccountType)</td>
+                <td>
+                    <a class="btn btn-primary"
+                        asp-action="DateEnter" asp-route-account="@account">View Transactions</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

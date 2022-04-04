@@ -1,0 +1,21 @@
+﻿@using MvcMovie.Models
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="display-4" align="center">Login</h1>
+
+<div class="row" align="center">
+    <br /><br />
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4" align="center">
+        Welcome Admin.
+        <br />
+        Please select a feature to use in the navbar.
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

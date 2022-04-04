@@ -1,0 +1,62 @@
+﻿@using McbaExampleWithLogin.Models
+@model Customer
+@{
+    ViewData["Title"] = "MyProfileEdit";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="MyProfileEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label for="Name" class="control-label">Name:</label>
+                <input id="Name" name="Name" class="form-control" value="@Model.Name"
+                    data-val="true" data-val-required="The Name field is required." />
+                @Html.ValidationMessage("Name", new { @class = "text-danger" })
+                <br />
+                <label for="TFN" class="control-label">TFN:</label>
+                <input id="TFN" name="TFN" class="form-control" value="@Model.TFN"
+                    data-val="true"/>
+                @Html.ValidationMessage("TFN", new { @class = "text-danger" })
+                <br />
+                <label for="Address" class="control-label">Address:</label>
+                <input id="Address" name="Address" class="form-control" value="@Model.Address"
+                    data-val="true"/>
+
+                @Html.ValidationMessage("Address", new { @class = "text-danger" })
+                <br />
+                <label for="City" class="control-label">City:</label>
+                <input id="City" name="City" class="form-control" value="@Model.City"
+                    data-val="true"/>
+                @Html.ValidationMessage("City", new { @class = "text-danger" })
+                <br />
+                <label for="State" class="control-label">State:</label>
+                <input id="State" name="State" class="form-control" value="@Model.State"
+                    data-val="true"/>
+                @Html.ValidationMessage("State", new { @class = "text-danger" })
+                <br />
+                <label for="PostCode" class="control-label">PostCode:</label>
+                <input id="PostCode" name="PostCode" class="form-control" value="@Model.PostCode"
+                    data-val="true"/>
+                @Html.ValidationMessage("PostCode", new { @class = "text-danger" })
+                <br />
+                <label for="Mobile" class="control-label">Mobile:</label>
+                <input id="Mobile" name="Mobile" class="form-control" value="@Model.Mobile"
+                    data-val="true"/>
+                @Html.ValidationMessage("Mobile", new { @class = "text-danger" })
+                <br />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Edit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="MyProfile">Back to Profile</a>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

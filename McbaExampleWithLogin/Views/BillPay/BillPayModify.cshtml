@@ -1,0 +1,66 @@
+﻿@using McbaExampleWithLogin.Models
+@model BillPay
+@{
+    ViewData["Title"] = "BillPay";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="BillPayModify">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+
+                <label for="payeeID">PayeeID:</label>
+                <select name="payeeID" id="payeeID">
+                    <option value="-1"></option>
+                    @foreach (var payee in ViewBag.Payees)
+                    {
+                        <option value="@payee">@payee</option>
+                    }
+                </select>
+                <br />
+                @Html.ValidationMessage("PayeeID", new { @class = "text-danger" })
+                <br />
+                <br />
+
+                <label for="Amount" class="control-label">Amount:</label>
+                <input id="Amount" name="Amount" class="form-control" value="@Model.Amount"
+                    data-val="true" data-val-number="The field Amount must be a number."
+                    data-val-required="The Amount field is required." />
+                @Html.ValidationMessage("Amount", new { @class = "text-danger" })
+                <br />
+
+                <label for="Date" class="control-label">Date:</label>
+                <input id="Date" type="datetime-local" name="Date" class="form-control"
+                    data-val="true" data-val-required="The Date field is required."/>
+                @Html.ValidationMessage("Date", new { @class = "text-danger" })
+                <br />
+                <br />
+
+                <label for="period">period:</label>
+                <select name="period" id="period">
+                    @if (Model.Period.ToString().Equals("O"))
+                    {
+                        <option value="O">O</option>
+                        <option value="M">M</option>  
+                    }s
+                    else{
+                        <option value="M">M</option>
+                        <option value="O">O</option>  
+                    }
+                </select>
+
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Confirm Changes" class="btn btn-primary" />
+            </div>
+        </form>
+        <div>
+            <a asp-action="ViewBills" asp-route-id="@Model.AccountNumber">Back to View Bills</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

@@ -1,0 +1,45 @@
+﻿@using McbaExampleWithLogin.Models
+@model Customer
+@{
+    ViewData["Title"] = "MyProfile";
+}
+
+<div class="row">
+    <div class="col-md-4">
+            <div class="form-group">
+                <b>Name:</b> @Model.Name
+                <br />
+                <br />
+                <b>TFN:</b> @Model.TFN
+                <br />
+                <br />
+                <b>Address:</b> @Model.Address
+                <br />
+                <br />
+                <b>City:</b> @Model.City
+                <br />
+                <br />
+                <b>State:</b> @Model.State
+                <br />
+                <br />
+                <b>PostCode:</b> @Model.PostCode
+                <br />
+                <br />
+                <b>Mobile:</b> @Model.Mobile
+                <br />
+                <br />
+                <a class="btn btn-primary"
+                        asp-action= "MyProfileEdit" asp-route-id="@Model.CustomerID">Edit</a>    
+                <a class="btn btn-primary"
+                        asp-action= "PasswordEdit" asp-route-id="@Model.CustomerID">Edit Password</a>
+            </div>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to Accounts</a>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

@@ -1,0 +1,32 @@
+﻿@using MvcMovie.Models
+@model IEnumerable<Customer>
+@{
+    ViewData["Title"] = "Accounts";
+}
+
+<div>
+    
+    <h3>Users</h3>
+    <table class="table">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.CustomerID)</th>
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th></th>
+        </tr>
+        @foreach(var customer in Model) 
+        {
+            <tr>
+                <td>@Html.DisplayFor(x => customer.CustomerID)</td>
+                <td>@Html.DisplayFor(x => customer.Name)</td>
+                <td>
+                    <a class="btn btn-primary"
+                        asp-action="AccountSelect" asp-route-id="@customer.CustomerID">View Transactions</a>
+                    <a class="btn btn-primary"
+                        asp-action="ModifyProfile" asp-route-id="@customer.CustomerID">Modify Profile</a>
+                        <a class="btn btn-primary"
+                            asp-action="LockLogin" asp-route-id="@customer.CustomerID">Lock / Unlock Login</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

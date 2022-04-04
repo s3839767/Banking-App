@@ -1,0 +1,44 @@
+﻿@using McbaExampleWithLogin.Models
+@model Login
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1 class="display-4" align="center">Login</h1>
+
+<div class="row" align="center">
+    <br /><br />
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4" align="center">
+        <form asp-action="Login" align="center">
+            <div class="form-group" align="center">
+                <label asp-for="LoginID" class="control-label" align="center"></label>
+                <input asp-for="LoginID" class="form-control" align="center"/>
+                <span asp-validation-for="LoginID" class="text-danger"></span>
+            </div>
+            <div class="form-group" align="center">
+                <label for="Password" class="control-label" align="center">Password</label>
+                <input id="Password" name="Password" type="password" class="form-control"
+                    data-val="true" data-val-required="The Password field is required." align="center" />
+                @Html.ValidationMessage("Password", new { @class = "text-danger" })
+            </div>
+            <div class="form-group" align="center">
+                <input type="submit" value="Login" class="btn btn-primary" align="center"/>
+            </div>
+            @Html.ValidationMessage("LoginFailed", new { @class = "text-danger" })
+            @Html.ValidationMessage("LoginLocked", new { @class = "text-danger" })
+        </form>
+    </div>
+    <br />
+    <p text-align="center">We're Australia’s leading provider of integrated financial services and institutional banking. Branched by the University RMIT, we aim to be a financially viable and loyal bank that is committed to improving the quality of life of all customers who trust us to be their bank of choice.</p>
+    <br />
+    <p text-align="center">We as Bank of RMIT, aim to demonstrate behaviour that focues on the customer and only the customer to fufill the needs they expect and are soley the reason why we are here.</p>
+    <br />
+    <p text-align="center"><b>Mission Statement: </b>"Committed to those we serve"</p>
+
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
